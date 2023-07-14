@@ -4,7 +4,7 @@ project(playground VERSION 0.0.1 DESCRIPTION "C++11,14 playground" LANGUAGES C C
 set(DEFAULT_BUILD_TYPE "Debug")
 
 #set(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_BUILD_TYPE "Release")
+set(CMAKE_BUILD_TYPE "Debug")
 
 #STNDARD STUFF
 set(CMAKE_CXX_STANDARD 17)
@@ -64,10 +64,36 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 #	${SRC_UTILS} ${HEADERS_UTILS})
 
 set(SRC_GTEST
-	gtest/gtest_test.cc gtest/gtest.cc)
+	gtest/gtest_smart_pointer.cc
+	gtest/gtest_test.cc
+	gtest/gtest.cc)
 
 set(HEADERS_GTEST
+	gtest/gtest_smart_pointer.h
     gtest/gtest_test.h)
 
 add_executable(gtest_playground ${SRC_GTEST} ${HEADERS_GTEST})
 target_link_libraries(gtest_playground gtest gmock spdlog Qt5::Core Threads::Threads)
+
+if (WIN32)
+	if(${CMAKE_BUILD_TYPE} STREQUAL  "Release")
+		set(PREFIX_BUILD_TYPE "")
+	endif()
+	if(${CMAKE_BUILD_TYPE} STREQUAL  "Debug")
+		set(PREFIX_BUILD_TYPE "d")
+	endif()
+    get_target_property(QT5_QMAKE_EXECUTABLE Qt5::qmake IMPORTED_LOCATION)
+    get_filename_component(QT5_WINDEPLOYQT_EXECUTABLE ${QT5_QMAKE_EXECUTABLE} PATH)
+    set(QT5_WINDEPLOYQT_EXECUTABLE "${QT5_WINDEPLOYQT_EXECUTABLE}/windeployqt.exe")
+
+    add_custom_command(TARGET gtest_playground POST_BUILD
+       COMMAND ${QT5_WINDEPLOYQT_EXECUTABLE} --qmldir ${CMAKE_SOURCE_DIR} $<TARGET_FILE_DIR:gtest_playground>)
+endif(WIN32)
+
+if (WIN32)
+	add_custom_command(TARGET gtest_playground POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different  ${QT5_PATH}/bin/Qt5Test${PREFIX_BUILD_TYPE}.dll   ${CMAKE_BUILD_TYPE}/
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different  ${QT5_PATH}/bin/Qt5Gui${PREFIX_BUILD_TYPE}.dll   ${CMAKE_BUILD_TYPE}/
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different  ${QT5_PATH}/bin/Qt5Core${PREFIX_BUILD_TYPE}.dll   ${CMAKE_BUILD_TYPE}/
+	)
+endif(WIN32)
