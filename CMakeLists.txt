@@ -65,11 +65,13 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 set(SRC_GTEST
 	gtest/gtest_smart_pointer.cc
+	gtest/gtest_move.cc
 	gtest/gtest_test.cc
 	gtest/gtest.cc)
 
 set(HEADERS_GTEST
 	gtest/gtest_smart_pointer.h
+	gtest/gtest_move.h
     gtest/gtest_test.h)
 
 add_executable(gtest_playground ${SRC_GTEST} ${HEADERS_GTEST})
