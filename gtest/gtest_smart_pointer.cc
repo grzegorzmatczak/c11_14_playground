@@ -4,7 +4,6 @@
 
 using ::testing::AtLeast;
 
-
 namespace gtest_smart_pointer
 {
 	TEST_F(GTest_smart_pointer, test_unique_ptr)
@@ -14,7 +13,6 @@ namespace gtest_smart_pointer
 		bool opt1{false};
 		bool opt2{false};
 		EXPECT_EQ(opt1, opt2);
-
 	}
 
-}  // namespace gtest_smart_pointer
+} // namespace gtest_smart_pointer

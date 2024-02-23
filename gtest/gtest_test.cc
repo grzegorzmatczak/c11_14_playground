@@ -2,7 +2,6 @@
 
 using ::testing::AtLeast;
 
-
 namespace gtest_test
 {
 	TEST_F(GTest_test, test_1)
@@ -10,7 +9,6 @@ namespace gtest_test
 		bool opt1{false};
 		bool opt2{false};
 		EXPECT_EQ(opt1, opt2);
-
 	}
 
-}  // namespace gtest_configreader
+} // namespace gtest_configreader

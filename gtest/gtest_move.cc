@@ -4,7 +4,6 @@
 
 using ::testing::AtLeast;
 
-
 namespace gtest_move
 {
 
@@ -13,9 +12,9 @@ namespace gtest_move
 		bool opt1{false};
 		bool opt2{false};
 		int int1{123};
-		logAndProcess(int1);                  // call with lvalue
-		logAndProcess(std::move(int1));       // call with rvalue
+		logAndProcess(int1);			// call with lvalue
+		logAndProcess(std::move(int1)); // call with rvalue
 
 		EXPECT_EQ(opt1, opt2);
 	}
-}  // namespace gtest_move
+} // namespace gtest_move
