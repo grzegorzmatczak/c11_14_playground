@@ -7,23 +7,6 @@ using ::testing::AtLeast;
 
 namespace gtest_virtual_destructor
 {
-
-	class CBazowa
-	{
-	public:
-		CBazowa();
-		~CBazowa();
-		// virtual ~CBazowa();
-	}; // class CBazowa
-
-	class CPochodna
-		: public CBazowa
-	{
-	public:
-		CPochodna();
-		~CPochodna();
-	}; // class CPochodna
-
 	CBazowa::CBazowa()
 	{
 		printf("CBazowa()\n");
