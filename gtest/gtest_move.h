@@ -29,7 +29,6 @@ namespace gtest_move
 			void logAndProcess(T&& param)            // param to process
 			{
 				auto now =std::chrono::system_clock::now();
-				//makeLogEntry("Calling 'process'", now);
 				process(std::forward<T>(param));
 			}
 	};

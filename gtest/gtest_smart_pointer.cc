@@ -17,4 +17,4 @@ namespace gtest_smart_pointer
 
 	}
 
-}  // namespace gtest_configreader
+}  // namespace gtest_smart_pointer
