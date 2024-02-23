@@ -26,6 +26,11 @@ namespace gtest_smart_pointer
 		pointerToClass.reset(new CBazowa(4));
 	}
 
+	TEST_F(GTest_smart_pointer, test_make_unique_ptr)
+	{
+		std::unique_ptr<CBazowa> pointerToClass = std::make_unique<CBazowa>(1);
+	}
+
 	TEST_F(GTest_smart_pointer, test_shared_ptr)
 	{
 		std::shared_ptr<CBazowa> pointerToClass(new CBazowa(1));
@@ -33,6 +38,11 @@ namespace gtest_smart_pointer
 		pointerToClass.reset(new CBazowa(2));
 		pointerToClass.reset(new CBazowa(3));
 		pointerToClass.reset(new CBazowa(4));
+	}
+
+	TEST_F(GTest_smart_pointer, test_make_shared_ptr)
+	{
+		std::shared_ptr<CBazowa> pointerToClass = std::make_shared<CBazowa>(1);
 	}
 
 	TEST_F(GTest_smart_pointer, test_weak_ptr)
@@ -50,12 +60,17 @@ namespace gtest_smart_pointer
 		if (auto tmp = weak1.lock())
 			std::cout << "weak1 value is " << tmp->getValue() << '\n';
 		else
-			std::cout << "weak1 is expired\n";
+			std::cout << "can not lock weak1\n";
+
+		if (auto tmp = weak1.expired())
+			std::cout << "weak1 is expired " << '\n';
+		else
+			std::cout << "weak1 is not expired\n";
 
 		if (auto tmp = weak2.lock())
 			std::cout << "weak2 value is " << tmp->getValue() << '\n';
 		else
-			std::cout << "weak2 is expired\n";
+			std::cout << "can not lock weak2\n";
 	}
 
 } // namespace gtest_smart_pointer
