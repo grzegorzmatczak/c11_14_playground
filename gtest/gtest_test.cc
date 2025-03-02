@@ -9,6 +9,7 @@ namespace gtest_test
 		bool opt1{false};
 		bool opt2{false};
 		EXPECT_EQ(opt1, opt2);
+		
 	}
 
 } // namespace gtest_configreader

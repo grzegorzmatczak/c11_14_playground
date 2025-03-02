@@ -12,7 +12,7 @@ namespace gtest_virtual_destructor
 	public:
 		CBazowa();
 		~CBazowa();
-		// virtual ~CBazowa();
+		//virtual ~CBazowa();
 	}; // class CBazowa
 
 	class CPochodna

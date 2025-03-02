@@ -28,9 +28,15 @@ namespace gtest_virtual_destructor
 		printf("~CPochodna()\n");
 	}
 
-	TEST_F(GTest_virtual_destructor, test_move1)
+	TEST_F(GTest_virtual_destructor, test_virtual_destructor_1)
 	{
 		CBazowa *pBase = new CPochodna;
 		delete pBase;
+	}
+
+	TEST_F(GTest_virtual_destructor, test_virtual_destructor_2)
+	{
+		CPochodna *pPochodna = new CPochodna;
+		delete pPochodna;
 	}
 } // namespace gtest_virtual_destructor
